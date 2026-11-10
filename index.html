@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SiGeRU · Sistema de Gestión de Residuos Urbanos</title>
+  <meta name="description" content="SiGeRU conecta a vecinos, cuadrillas y municipio para que los contenedores estén limpios y los reclamos tengan respuesta.">
+  <link rel="icon" href="img/favicon.png">
+  <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+  <header class="cabecera">
+    <a class="marca" href="#inicio"><img src="img/logo-sigeru-icono.png" alt="" width="40" height="40"><span>SiGeRU</span></a>
+    <nav aria-label="Secciones">
+      <a href="#como" data-i18n="nav.como">Cómo funciona</a>
+      <a href="#mapa" data-i18n="nav.mapa">Mapa</a>
+      <a href="#perfiles" data-i18n="nav.perfiles">Para quién</a>
+      <a href="#registro" data-i18n="nav.registro">Registrarse</a>
+    </nav>
+    <div class="cabecera-acciones">
+      <button class="idioma" id="idioma" type="button">EN</button>
+      <a class="boton boton-claro" href="/app/" data-i18n="nav.ingresar">Ingresar</a>
+    </div>
+  </header>
+
+  <main id="inicio">
+    <section class="portada">
+      <div class="portada-texto">
+        <p class="etiqueta" data-i18n="portada.etiqueta">Gestión de residuos urbanos</p>
+        <h1 data-i18n="portada.titulo">Contenedores limpios, reclamos con respuesta.</h1>
+        <p class="bajada" data-i18n="portada.bajada">SiGeRU conecta a vecinos, cuadrillas y municipio: reportá un contenedor desbordado en segundos, seguí su estado y ayudá a planificar mejor la recolección.</p>
+        <div class="botones">
+          <a class="boton" href="#mapa" data-i18n="portada.ver_mapa">Ver el mapa</a>
+          <a class="boton boton-borde" href="/app/#/registro" data-i18n="portada.crear_cuenta">Crear una cuenta</a>
+        </div>
+      </div>
+      <div class="portada-imagen"><img src="img/logo-sigeru.png" alt="Logo de SiGeRU" width="256" height="306"></div>
+    </section>
+
+    <section id="como" class="seccion">
+      <h2 data-i18n="como.titulo">Cómo funciona</h2>
+      <ol class="pasos">
+        <li><span class="numero">1</span><h3 data-i18n="como.paso1">Escaneá el código</h3><p data-i18n="como.paso1_texto">Cada contenedor tiene un código QR. Al escanearlo se abre el formulario de ese contenedor, sin buscar direcciones.</p></li>
+        <li><span class="numero">2</span><h3 data-i18n="como.paso2">Contá qué pasa</h3><p data-i18n="como.paso2_texto">Desborde, rotura, quema o falta de recolección. Si otro vecino ya avisó, tu reporte se suma al existente.</p></li>
+        <li><span class="numero">3</span><h3 data-i18n="como.paso3">Seguí la respuesta</h3><p data-i18n="como.paso3_texto">El municipio asigna una cuadrilla y, si tenés cuenta, te avisamos cuando el problema queda resuelto.</p></li>
+      </ol>
+      <form id="form-codigo" class="codigo-manual" novalidate>
+        <label for="codigo-contenedor" data-i18n="como.codigo_label">¿El QR no se lee? Escribí el código que figura en la etiqueta del contenedor:</label>
+        <div class="codigo-fila">
+          <input id="codigo-contenedor" name="codigo" type="text" maxlength="12" placeholder="CNT-0010" autocomplete="off" required>
+          <button class="boton" type="submit" data-i18n="como.codigo_boton">Reportar</button>
+        </div>
+        <p class="mensaje" id="mensaje-codigo" role="status" aria-live="polite"></p>
+      </form>
+    </section>
+
+    <section id="mapa" class="seccion seccion-gris">
+      <h2 data-i18n="mapa.titulo">Mapa de contenedores y centros</h2>
+      <p data-i18n="mapa.texto">Consultá antes de salir qué contenedores están disponibles y dónde llevar tus reciclables.</p>
+      <div class="contadores" id="contadores" aria-live="polite"></div>
+      <div id="mapa-publico" class="mapa"></div>
+      <ul class="leyenda" id="leyenda"></ul>
+    </section>
+
+    <section id="perfiles" class="seccion">
+      <h2 data-i18n="perfiles.titulo">Una herramienta para cada actor</h2>
+      <div class="perfiles">
+        <article><h3 data-i18n="perfiles.vecinos">Vecinos</h3><p data-i18n="perfiles.vecinos_texto">Reportan problemas, consultan el mapa y reciben aviso cuando se resuelve lo que informaron.</p></article>
+        <article><h3 data-i18n="perfiles.cuadrillas">Cuadrillas</h3><p data-i18n="perfiles.cuadrillas_texto">Ven sus tareas y el recorrido del día, registran cada contenedor vaciado y los insumos usados.</p></article>
+        <article><h3 data-i18n="perfiles.operarios">Centros de acopio</h3><p data-i18n="perfiles.operarios_texto">Registran ingresos y egresos de residuos, controlan la capacidad y el estado de la maquinaria.</p></article>
+        <article><h3 data-i18n="perfiles.municipio">Municipio</h3><p data-i18n="perfiles.municipio_texto">Gestiona contenedores, flota y rutas, asigna incidencias y analiza estadísticas para decidir mejor.</p></article>
+      </div>
+    </section>
+
+    <section id="registro" class="seccion seccion-registro">
+      <div>
+        <h2 data-i18n="registro.titulo">Solicitá tu acceso</h2>
+        <p data-i18n="registro.texto">Los vecinos quedan habilitados al instante. El personal municipal queda pendiente hasta que un administrador lo apruebe.</p>
+      </div>
+      <form id="form-registro" class="formulario" novalidate>
+        <div class="fila">
+          <label><span data-i18n="registro.nombre">Nombre</span><input name="nombre" required maxlength="60" autocomplete="given-name"></label>
+          <label><span data-i18n="registro.apellido">Apellido</span><input name="apellido" required maxlength="60" autocomplete="family-name"></label>
+        </div>
+        <label><span data-i18n="registro.email">Correo electrónico</span><input name="email" type="email" required maxlength="120" autocomplete="email"></label>
+        <div class="fila">
+          <label><span data-i18n="registro.rol">Soy</span>
+            <select name="rol"><option value="vecino" data-i18n="rol.vecino">Vecino</option><option value="cuadrilla" data-i18n="rol.cuadrilla">Integrante de cuadrilla</option><option value="operario" data-i18n="rol.operario">Operario de centro</option></select></label>
+          <label class="campo-documento" hidden><span data-i18n="registro.documento">Cédula</span><input name="documento" inputmode="numeric" maxlength="11"></label>
+        </div>
+        <label><span data-i18n="registro.clave">Contraseña</span><input name="password" type="password" required minlength="10" autocomplete="new-password">
+          <small data-i18n="registro.ayuda_clave">Mínimo 10 caracteres, con mayúsculas, minúsculas, números y un símbolo.</small></label>
+        <div class="trampa" aria-hidden="true"><label>Sitio web <input name="sitio_web" tabindex="-1" autocomplete="off"></label></div>
+        <p class="mensaje" id="mensaje-registro" role="status" aria-live="polite"></p>
+        <button class="boton" type="submit" data-i18n="registro.enviar">Enviar solicitud</button>
+      </form>
+    </section>
+  </main>
+
+  <footer class="pie">
+    <div><img src="img/logo-aplec.png" alt="Aplec Software" width="64" height="56"></div>
+    <p data-i18n="pie.texto">SiGeRU es un desarrollo de Aplec Software. Proyecto de pasaje de grado, Escuela Superior de Informática (UTU), 2026.</p>
+  </footer>
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
